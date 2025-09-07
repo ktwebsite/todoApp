@@ -1,15 +1,14 @@
 version: "3.9"
 services:
   db:
-    image: mysql:8.0
-    container_name: mydb
+    image: postgres:16
+    container_name: mytodoappdb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: myapp
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pass
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mytodoapp
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - ./postgres-data:/var/lib/postgresql/data
