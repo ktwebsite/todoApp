@@ -10,8 +10,8 @@ datasource db {
 
 model Post {
   id           Int       @id @default(autoincrement())
-  title        String    @db.VarChar(255)
-  details      String?
+  title        String    @db.VarChar(120)   // 最大120文字
+  details      String?   @db.VarChar(10000) // 最大10,000文字
   deadline     DateTime?
   status       String    @default("未完了") @db.VarChar(20)
   completed_at DateTime?
