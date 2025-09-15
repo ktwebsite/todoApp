@@ -9,8 +9,8 @@ export default async function RootPage({
   searchParams,
 }: {
   searchParams: {
-    filterStatus?: "all" | "completed" | "incomplete"
-    sortParams?: "asc" | "desc"
+    filterStatus?: string
+    sortParams?: string
   }
 }) {
   const filterStatus = searchParams?.filterStatus ?? "all"

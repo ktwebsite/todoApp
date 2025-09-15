@@ -13,8 +13,8 @@ import {
 export default function FilterButton({
   currentStatus,currentSort
 }: {
-  currentStatus: "all" | "completed" | "incomplete"
-  currentSort:  "asc" | "desc"
+  currentStatus: string
+  currentSort: string
 }) {
   const router = useRouter()
   const handleChange = (value: string) => {

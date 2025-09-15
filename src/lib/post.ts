@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 
-export async function getPosts(status?: "all" | "completed" | "incomplete",sort?: "asc" | "desc") {
+export async function getPosts(status?: string | "incomplete",sort?: string) {
   let where = {}
 
   if (status === "completed") {

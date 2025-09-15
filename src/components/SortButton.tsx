@@ -13,8 +13,8 @@ import {
 export default function SortButton({
   currentSort,currentStatus
 }: {
-  currentSort:  "asc" | "desc"
-  currentStatus: "all" | "completed" | "incomplete"
+  currentSort: string
+  currentStatus: string
 }) {
   const router = useRouter()
   const handleSortDeadline = (value: string) => {
