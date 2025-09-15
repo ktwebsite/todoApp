@@ -13,17 +13,16 @@ export default async function RootPage({
     sortParams?: "asc" | "desc"
   }
 }) {
-  const { filterStatus, sortParams } = await searchParams
-  const status = filterStatus ?? "all"
-  const sort = sortParams ?? "asc"
-  const posts = await getPosts(status,sort)
+  const filterStatus = searchParams?.filterStatus ?? "all"
+  const sortParams = searchParams?.sortParams ?? "asc"  
+  const posts = await getPosts(filterStatus,sortParams)
   return (
     <div >
       <div className="flex ml-8 mt-8 justify-between">
         <h1 className="text-3xl font-bold">タスク一覧</h1>
         <div className="flex">
-          <div><FilterButton currentStatus={status} currentSort={sort}/></div>
-          <div><SortButton currentSort={sort} currentStatus={status}/></div>
+          <div><FilterButton currentStatus={filterStatus} currentSort={sortParams}/></div>
+          <div><SortButton currentSort={sortParams} currentStatus={filterStatus}/></div>
         </div>
       </div>
       <div>
