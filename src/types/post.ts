@@ -1,10 +1,10 @@
 export type Post = {
-  id: string
+  id: number
   title: string
-  details: string
-  deadline: Date
+  details: string | null
+  deadline: Date | null
   status: string
-  completed_at: Date
+  completed_at: Date | null
 }
 
 export type PostTableProps = {post: Post}

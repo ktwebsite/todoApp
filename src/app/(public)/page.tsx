@@ -8,13 +8,11 @@ import { getPosts } from "@/lib/post"
 export default async function RootPage({
   searchParams,
 }: {
-  searchParams: {
-    filterStatus?: string
-    sortParams?: string
-  }
-}) {
-  const filterStatus = searchParams?.filterStatus ?? "all"
-  const sortParams = searchParams?.sortParams ?? "asc"  
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}){
+  const params = await searchParams;
+  const filterStatus = (params.filterStatus as string | undefined) ?? "all"
+  const sortParams = (params.sortParams as string | undefined) ?? "asc"
   const posts = await getPosts(filterStatus,sortParams)
   return (
     <div >

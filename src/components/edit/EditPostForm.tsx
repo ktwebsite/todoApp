@@ -5,35 +5,38 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { PostTableProps } from "@/types/post";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postSchema } from "@/lib/validation/postShema";
+import { Post} from "@/types/post";
+import z from "zod";
 
-export default function EditPostForm({ defaultValues }: { defaultValues: PostTableProps }) {
+type PostFormValues = z.infer<typeof postSchema>;
+
+export default function EditPostForm({ defaultValues }: { defaultValues: Post }) {
   const router = useRouter();
 
-  // deadlineを YYYY-MM-DD 形式に変換
-  const formattedDeadline = defaultValues.deadline
-    ? new Date(defaultValues.deadline).toISOString().split("T")[0]
-    : "";
-
+  const formDefaultValues: PostFormValues = {
+    title: defaultValues.title,
+    details: defaultValues.details ?? "",
+    deadline: defaultValues.deadline
+      ? new Date(defaultValues.deadline).toISOString().split("T")[0]
+      : "",
+    status: defaultValues.status as "未完了" | "完了", // ← 型を絞る
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<PostTableProps>({
+  } = useForm<PostFormValues>({
     resolver: zodResolver(postSchema),
     mode: "onChange", 
-    defaultValues: {
-      ...defaultValues,
-      deadline: formattedDeadline,
-    },
+    defaultValues: formDefaultValues, 
   });
 
-  const onSubmit = async (data: PostTableProps) => {
+  const onSubmit = async (data: PostFormValues) => {
     console.log("送信データ:", data); // ← 確認用
     await fetch(`/api/posts/${defaultValues.id}`, {
       method: "PUT",

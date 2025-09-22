@@ -1,8 +1,9 @@
 import { getPost } from "@/lib/post";
 
-export default async function detailPage({ params }: { params: { id: string } }) {
+export default async function detailPage({ params }: { params: Promise<{ id: string }>}) {
   // id を number に変換して DB 取得
-  const post = await getPost(params.id);
+  const {id} = await params
+  const post = await getPost(id);
 
   if (!post) {
     return <div className="p-6">タスクが見つかりません。</div>;

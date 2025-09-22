@@ -1,13 +1,14 @@
 // app/api/posts/[id]/route.ts
 import { prisma } from "@/lib/prisma";
+import { patchFetch } from "next/dist/server/app-render/entry-base";
 import { NextResponse } from "next/server";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const body = await req.json();
-
+  const {id} = await params
   try {
     const updated = await prisma.post.update({
-      where: { id: Number(params.id) }, // ← IDを数値に変換しているか要確認
+      where: { id: Number(id) }, // ← IDを数値に変換しているか要確認
       data: {
         title: body.title,
         details: body.details,
@@ -24,10 +25,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const {id} = await params
   try {
     await prisma.post.delete({
-      where: { id: Number(params.id) }, // ← ここで削除
+      where: { id: Number(id) }, // ← ここで削除
     });
 
     return NextResponse.json({ message: "削除しました" });
