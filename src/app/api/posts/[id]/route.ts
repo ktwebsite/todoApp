@@ -1,6 +1,5 @@
 // app/api/posts/[id]/route.ts
 import { prisma } from "@/lib/prisma";
-import { patchFetch } from "next/dist/server/app-render/entry-base";
 import { NextResponse } from "next/server";
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
