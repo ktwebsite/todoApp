@@ -14,6 +14,7 @@ export default async function RootPage({
   const filterStatus = (params.filterStatus as string | undefined) ?? "all"
   const sortParams = (params.sortParams as string | undefined) ?? "asc"
   const posts = await getPosts(filterStatus,sortParams)
+  
   return (
     <div >
       <div className="flex ml-8 mt-8 justify-between">

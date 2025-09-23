@@ -48,7 +48,9 @@ export default function PostTable({ posts }: PostTableProps) {
               </TableCell>
               <TableCell>
                 {post.status === "完了"
-                  ? `完了 (${post.completed_at ? new Date(post.completed_at).toLocaleString() : "日時不明"})`
+                  ? `完了 (${post.completed_at 
+                      ? new Date(post.completed_at).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }) 
+                      : "日時不明"})`
                   : "未完了"}
               </TableCell>
               <TableCell className="flex gap-2">
