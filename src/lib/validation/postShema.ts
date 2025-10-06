@@ -11,6 +11,7 @@ export const postSchema = z.object({
       (val) => {
         if (!val) return true
         const today = new Date()
+        today.setHours(0, 0, 0, 0) 
         const selected = new Date(val)
         return selected >= today
       },
