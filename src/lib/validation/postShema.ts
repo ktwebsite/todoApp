@@ -17,7 +17,9 @@ export const postSchema = z.object({
       },
       { message: "過去の日付が選択されています" }
     ),
-  status: z.enum(["未完了", "完了"]),
+  status: z.enum(["未完了", "完了"], {
+  message: "ステータスを選択してください",
+}),
 })
 
 export type PostFormData = z.infer<typeof postSchema>

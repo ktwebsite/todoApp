@@ -19,6 +19,7 @@ export default function PostForm({ onSubmit }: { onSubmit: (data: PostFormData) 
     resolver: zodResolver(postSchema),
     mode: "onChange", // ✅ 入力ごとにリアルタイムバリデーション
   })
+  
 
   return (
     <form
