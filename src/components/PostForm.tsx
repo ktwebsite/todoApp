@@ -9,7 +9,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button"
 import { PostFormData, postSchema } from "@/lib/validation/postShema"
 
-export default function PostForm({ onSubmit }: { onSubmit: (data: PostFormData) => void }) {
+type PostFormProps = {
+  onSubmit: (data: PostFormData) => void;
+  isSubmitting: boolean; // ← 🔹ここが今回追加する型
+};
+
+export default function PostForm({ onSubmit,isSubmitting }: PostFormProps) {
   const {
     register,
     handleSubmit,
@@ -19,8 +24,6 @@ export default function PostForm({ onSubmit }: { onSubmit: (data: PostFormData) 
     resolver: zodResolver(postSchema),
     mode: "onChange", // ✅ 入力ごとにリアルタイムバリデーション
   })
-  
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -68,8 +71,9 @@ export default function PostForm({ onSubmit }: { onSubmit: (data: PostFormData) 
       <Button
         type="submit"
         className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-3 font-semibold"
+        disabled={isSubmitting}
       >
-        タスク作成
+        {isSubmitting ? "作成中..." : "タスク作成"}
       </Button>
     </form>
   )
