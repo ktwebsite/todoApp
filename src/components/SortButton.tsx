@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useTransition } from "react"
 
 export default function SortButton({
   currentSort,currentStatus
@@ -17,14 +18,17 @@ export default function SortButton({
   currentStatus: string
 }) {
   const router = useRouter()
+  const [isPending,startTransition] = useTransition()
   const handleSortDeadline = (value: string) => {
-    router.push(`/?sortParams=${value}&filterStatus=${currentStatus}`) // クエリを更新
+    startTransition(()=>{
+      router.push(`/?sortParams=${value}&filterStatus=${currentStatus}`) // クエリを更新
+    })
   }
 
   return (
     <div className="space-y-2 w-40">
       <Label>並び替え</Label>
-      <Select value={currentSort} onValueChange={handleSortDeadline}>
+      <Select value={currentSort} onValueChange={handleSortDeadline} disabled={isPending}>
         <SelectTrigger className="bg-white border rounded-md">
           <SelectValue placeholder="選択してください" />
         </SelectTrigger>

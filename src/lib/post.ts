@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 
-export async function getPosts(status?: string | "incomplete",sort?: string) {
+export async function getPosts(status?: string | "incomplete",sort?: string){
   let where = {}
 
   if (status === "completed") {
@@ -16,10 +16,19 @@ export async function getPosts(status?: string | "incomplete",sort?: string) {
   }else if(sort === "desc"){
     orderBy = {deadline: "desc"}
   }
-  return prisma.post.findMany({
-    where,
-    orderBy,
-  })
+  const posts = await prisma.post.findMany({
+        where,
+        orderBy,
+        select: {
+          id: true,
+          title: true,
+          details: true,
+          deadline: true,
+          status: true,
+          completed_at: true,
+        },
+      });
+  return posts;
 }
 
 export async function getPost(id: string){
