@@ -49,10 +49,17 @@ export default function EditPostForm({ defaultValues }: { defaultValues: Post })
   };
 
   return (
+    
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-md mx-auto mt-20 p-6 bg-white rounded-xl shadow-2xl space-y-6"
     >
+      <button
+      onClick={() => window.history.back()}
+      className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md"
+    >
+      ← 戻る
+    </button>
       <h1 className="text-2xl font-bold text-center">タスク編集</h1>
 
       {/* タイトル */}

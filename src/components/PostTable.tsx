@@ -29,7 +29,6 @@ export default function PostTable({ posts }: PostTableProps) {
             <TableHead>操作</TableHead>
           </TableRow>
         </TableHeader>
-
         {/* 複数のポストを map で描画 */}
         <TableBody>
           {posts.map((post) => (
@@ -54,12 +53,6 @@ export default function PostTable({ posts }: PostTableProps) {
                   : "未完了"}
               </TableCell>
               <TableCell className="flex gap-2">
-                <LinkAsButton
-                  href={`/posts/${post.id}`}
-                  className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl"
-                >
-                  詳細
-                </LinkAsButton>
                 <LinkAsButton
                   href={`/posts/${post.id}/edit`}
                   className="bg-green-500 hover:bg-green-600 text-white rounded-xl"
