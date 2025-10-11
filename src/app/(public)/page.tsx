@@ -1,6 +1,6 @@
 // src/app/page.tsx
-import { LinkAsButton } from "@/components/Button"
 import FilterButton from "@/components/FilterButton";
+import { LinkButton } from "@/components/LinkButton";
 import PostTable from "@/components/PostTable"
 import SortButton from "@/components/SortButton";
 import { getPosts } from "@/lib/post"
@@ -49,9 +49,9 @@ export default async function RootPage({
       </div>
 
       <div className="fixed left-5 bottom-5">
-        <LinkAsButton href={`/posts/news`} className="bg-orange-500 hover:bg-red-600 text-white rounded-xl px-6 py-3 text-lg shadow-lg">
+        <LinkButton href={`/posts/news`} className="bg-orange-500 hover:bg-red-600 text-white rounded-xl px-6 py-3 text-lg shadow-lg">
           新規タスク作成
-        </LinkAsButton>
+        </LinkButton>
       </div>
     </div>
   )

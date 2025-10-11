@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/table"
 import { ja } from "date-fns/locale"
 import { formatDistanceToNow } from "date-fns"
-import { LinkAsButton } from "./Button"
 import { Post } from "@/types/post" // 型は適宜修正
+import { LinkButton } from "./LinkButton"
 type PostTableProps = {
   posts: Post[] // ← 複数を受け取る
 }
@@ -53,18 +53,18 @@ export default function PostTable({ posts }: PostTableProps) {
                   : "未完了"}
               </TableCell>
               <TableCell className="flex gap-2">
-                <LinkAsButton
+                <LinkButton
                   href={`/posts/${post.id}/edit`}
                   className="bg-green-500 hover:bg-green-600 text-white rounded-xl"
                 >
                   編集
-                </LinkAsButton>
-                <LinkAsButton
+                </LinkButton>
+                <LinkButton
                   href={`/posts/${post.id}/delete`}
                   className="bg-red-500 hover:bg-red-600 text-white rounded-xl"
                 >
                   削除
-                </LinkAsButton>
+                </LinkButton>
               </TableCell>
             </TableRow>
           ))}

@@ -7,7 +7,7 @@ type Props = {
   className?: string
 }
 
-export function LinkAsButton({ href, children, className }: Props) {
+export function LinkButton({ href, children, className }: Props) {
   return (
     <Button  asChild className={className}>
       <Link href={href}>{children}</Link>
