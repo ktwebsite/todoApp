@@ -28,7 +28,7 @@ export default async function RootPage({
       <div>
         <PostTable posts={posts} /> 
       </div>
-      <div className="flex justify-center items-center gap-4 mt-6">
+      <div className="flex justify-center items-center gap-4 my-6 m">
         {page > 1 && (
           <a
             href={`/?page=${page - 1}&filterStatus=${filterStatus}&sortParams=${sortParams}`}
