@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 
-export async function getPosts(status?: string | "incomplete",sort?: string){
+export async function getPosts(status?: string | "incomplete",sort?: string,page: number = 1){
+  const perPage = 20
   let where = {}
 
   if (status === "completed") {
@@ -19,6 +20,8 @@ export async function getPosts(status?: string | "incomplete",sort?: string){
   const posts = await prisma.post.findMany({
         where,
         orderBy,
+        skip: (page - 1) * perPage,
+        take: perPage,
         select: {
           id: true,
           title: true,
@@ -28,7 +31,10 @@ export async function getPosts(status?: string | "incomplete",sort?: string){
           completed_at: true,
         },
       });
-  return posts;
+
+  const totalCount = await prisma.post.count({ where })
+  const totalPages = Math.ceil(totalCount / perPage)
+  return {posts, totalPages};
 }
 
 export async function getPost(id: string){
